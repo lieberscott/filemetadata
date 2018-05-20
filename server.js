@@ -46,7 +46,7 @@ app.get('/hello', (req, res) => {
 
 app.post("/api/fileanalyze", upload.single("upfile"), (req, res, next) => { // upfile is name from index.html form
   console.log(req.file);
-  res.json({ response: "Success" });
+  // res.json({ response: "Success" });
 });
 
 app.listen(process.env.PORT || 3000, function () {

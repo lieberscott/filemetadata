@@ -17,28 +17,28 @@ let FileSchema = new Schema({
 let File = mongoose.model("File", FileSchema);
 
 
-let createFile = (req, res) => {
-  let newfile = req.body.username; // captures input field of form; "username" here matches <input name="username"> in index.html file
+let createFile = (req, res, done) => {
+  let filename = req.file.originalname;
+  let path = req.file.path; // captures urlpath field of file; "path" here is part of the object captured by multer
   
-  checkRepeat(newexerciser);
-  
-  async function checkRepeat(exerciser) { // check if exerciser is already in database
-    let check = await File.findOne({username: exerciser});
+//   async function checkRepeat(exerciser) { // check if exerciser is already in database
+//     let check = await File.findOne({username: exerciser});
 
-    if (check) { // username already exists
-      res.json({
-        Error: "Username already in use. Please select another."
-      });
-    }
+//     if (check) { // username already exists
+//       res.json({
+//         Error: "Username already in use. Please select another."
+//       });
+//     }
     
-    else { // doesn't exist, so trigger addUser function
-      addExerciser(exerciser);
-    }
-  };
+//     else { // doesn't exist, so trigger addUser function
+//       addExerciser(exerciser);
+//     }
+//   };
   
-  function addExerciser(username) {
+  function addFile(filename, path) {
     let newentry = new File({
-        username: username
+      filename: filename,
+      url: path
       });
       
      newentry.save((err, data) => {
