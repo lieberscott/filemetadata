@@ -5,7 +5,7 @@ const cors = require('cors');
 // require and use "multer"...
 const multer = require('multer');
 
-const storage = multer.diskStorage({
+const storage = multer.diskStorage({ // saving uploads parameters
   destination: function(req, file, cb) {
     cb(null, "./uploads/"); // where to save file
   },
@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
   }
 });
 
-const fileFilter = (req, file, cb) => {
+const fileFilter = (req, file, cb) => { // only save certain files, not others
   if (file.mimetype === "image/png") {
     cb(new Error("only store png files"), false); // will not save file
   }

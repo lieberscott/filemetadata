@@ -45,7 +45,8 @@ let createFile = (req, res, done) => {
     res.json({
       name: req.file.originalname,
       type: req.file.mimetype,
-      size: req.file.size + " bytes"
+      size: req.file.size + " bytes",
+      url: url
     });
   }
 
