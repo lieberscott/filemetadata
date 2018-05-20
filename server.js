@@ -16,10 +16,10 @@ const storage = multer.diskStorage({
 
 const fileFilter = (req, file, cb) => {
   if (file.mimetype === "image/png") {
-    cb(null, true); // will save file
+    cb(new Error("only store png files"), false); // will not save file
   }
   else {
-    cb(new Error("only store png files"), false); // will not save file
+    cb(null, true);
   }
 }
 
@@ -33,6 +33,11 @@ const upload = multer({
 
 const app = express();
 
+
+let newFile = require("./newFile.js");
+
+
+
 app.use(cors());
 app.use('/public', express.static(process.cwd() + '/public'));
 
@@ -44,10 +49,13 @@ app.get('/hello', (req, res) => {
   res.json({greetings: "Hello, API"});
 });
 
-app.post("/api/fileanalyze", upload.single("upfile"), (req, res, next) => { // upfile is name from index.html form
-  console.log(req.file);
-  // res.json({ response: "Success" });
-});
+
+app.post("/api/fileanalyze", upload.single("upfile"), newFile.createFile);
+
+// app.post("/api/fileanalyze", upload.single("upfile"), (req, res, next) => { // upfile is name from index.html form
+//   console.log(req.file);
+//   res.json({ response: "Success" });
+// });
 
 app.listen(process.env.PORT || 3000, function () {
   console.log('Node.js listening ...');
