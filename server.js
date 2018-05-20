@@ -4,7 +4,23 @@ const express = require('express');
 const cors = require('cors');
 // require and use "multer"...
 const multer = require('multer');
-const upload = multer({ dest: "uploads/" }); // will save uploaded files in the uploads folder (which it will create automatically)
+
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, "./uploads/"); // where to save file
+  },
+  filename: function(req, file, cb) {
+    cb(null, file.originalname); // how to save filename
+  }
+});
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024
+  },
+
+}); // will save uploaded files to storage parameters
 
 const app = express();
 
