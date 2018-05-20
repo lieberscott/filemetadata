@@ -36,15 +36,15 @@ const app = express();
 app.use(cors());
 app.use('/public', express.static(process.cwd() + '/public'));
 
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
      res.sendFile(process.cwd() + '/views/index.html');
   });
 
-app.get('/hello', function(req, res){
+app.get('/hello', (req, res) => {
   res.json({greetings: "Hello, API"});
 });
 
-app.post("/api/fileanalyze", upload.single("upfile"), (req, res, next) => {
+app.post("/api/fileanalyze", upload.single("upfile"), (req, res, next) => { // upfile is name from index.html form
   console.log(req.file);
   res.json({ response: "Success" });
 });
