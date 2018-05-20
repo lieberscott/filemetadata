@@ -4,7 +4,7 @@ const express = require('express');
 const cors = require('cors');
 // require and use "multer"...
 const multer = require('multer');
-const upload = multer({ dest: "/uploads/" });
+const upload = multer({ dest: "uploads/" }); // will save uploaded files in the uploads folder (which it will create automatically)
 
 const app = express();
 
@@ -19,8 +19,9 @@ app.get('/hello', function(req, res){
   res.json({greetings: "Hello, API"});
 });
 
-app.post("/api/analyze", () => {
-  
+app.post("/api/fileanalyze", upload.single("upfile"), (req, res, next) => {
+  console.log(req.file);
+  res.json({ response: "Success" });
 });
 
 app.listen(process.env.PORT || 3000, function () {
