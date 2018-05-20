@@ -10,16 +10,25 @@ const storage = multer.diskStorage({
     cb(null, "./uploads/"); // where to save file
   },
   filename: function(req, file, cb) {
-    cb(null, file.originalname); // how to save filename
+    cb(null, file.originalname); // how to save filename, may want to include Date.now() + file.originalname to avoid same names
   }
 });
+
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype === "image/png") {
+    cb(null, true); // will save file
+  }
+  else {
+    cb(new Error("only store png files"), false); // will not save file
+  }
+}
 
 const upload = multer({
   storage: storage,
   limits: {
-    fileSize: 1024 * 1024
+    fileSize: 1024 * 1024 // max 1 mb
   },
-
+  fileFilter: fileFilter
 }); // will save uploaded files to storage parameters
 
 const app = express();
