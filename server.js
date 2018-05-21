@@ -40,6 +40,10 @@ let newFile = require("./newFile.js");
 
 app.use(cors());
 app.use('/public', express.static(process.cwd() + '/public'));
+app.use(express.static("uploads")); // makes uploads folder publicly available so you can directly input url into address bar to see file
+// this video at about 20:00 mark: https://www.youtube.com/watch?v=srPXMt1Q0nY&index=10&list=PL55RiY5tL51q4D-B63KBnygU6opNPFk_q
+// this works: https://fcc-filemeta.glitch.me/comb.jpg
+
 
 app.get('/', (req, res) => {
      res.sendFile(process.cwd() + '/views/index.html');
