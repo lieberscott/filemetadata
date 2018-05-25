@@ -1,4 +1,4 @@
-Live project: fcc-filemeta.glitch.me
+Live project: https://fcc-filemeta.glitch.me
 
 
 # API Project: File Metadata Microservice for freeCodeCamp
