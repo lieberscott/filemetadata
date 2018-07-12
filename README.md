@@ -13,3 +13,5 @@ Live project: https://fcc-filemeta.glitch.me
 
 ### Hint:
 * To handle the file uploading you should use the [multer](https://www.npmjs.com/package/multer) npm package.
+
+Uses MongoDB, Express, and Node
